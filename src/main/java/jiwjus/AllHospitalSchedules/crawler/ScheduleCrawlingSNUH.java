@@ -24,10 +24,10 @@ public class ScheduleCrawlingSNUH {
 
             // 아이디 입력
             WebElement element = driver.findElement(By.xpath("//*[@id=\"id\"]"));
-            element.sendKeys("서울대병원아이디");
+            element.sendKeys("bella434107");
             // 비밀번호 입력
             element = driver.findElement(By.xpath("//*[@id=\"pass\"]"));
-            element.sendKeys("서울대병원비밀번호");
+            element.sendKeys("doby9980@@");
             //로그인 버튼 클릭
             element = driver.findElement(By.xpath("//*[@id=\"loginBtn\"]"));
             element.sendKeys(Keys.ENTER);
@@ -39,7 +39,7 @@ public class ScheduleCrawlingSNUH {
             // 클릭. 사실 element.click()로도 클릭이 가능한데 가끔 호환성 에러가 발생하는 경우가 있다.
             js.executeScript("arguments[0].click();", element);
             // 대기
-            Thread.sleep(3000); //1초==1000
+            Thread.sleep(3000);
 
             // 이비인후과
             element = driver.findElement(By.xpath("//*[@id=\"feSlItem-pub3\"]/label[8]/span"));
@@ -80,22 +80,31 @@ public class ScheduleCrawlingSNUH {
                 System.out.println("--오후진료");
                 List<WebElement> elements2pm = driver.findElement(By.className("calendarWrap")).findElements(By.className("schedulPM"));
                 Thread.sleep(3000);
-                System.out.println("사이즈: " + elements2pm.size());
+                int elements2pmSize = elements2pm.size();
+                System.out.println("사이즈: " + elements2pmSize);
 
-                for(WebElement element2 : elements2pm){
-                    System.out.println(element2.getText() + "일");
+                for(int j =0; j<elements2pmSize; j++){
+                    System.out.println(j);
+                    List<WebElement> elements2pm2 = driver.findElement(By.className("calendarWrap")).findElements(By.className("schedulPM"));
+                    WebElement element2 = elements2pm2.get(j);
+
                     Thread.sleep(3000);
+                    while (element2.isDisplayed() == false) {
+                        System.out.println("waiting..");
+                        Thread.sleep(3000);
+                    }
+
+                    System.out.println(element2.getText() + "일");
                     // 해당날짜의 예약 가능한 진료시간 조회
                     element2.click();
                     Thread.sleep(3000);
 
                     // 시간들
                     List<WebElement> elements3 = driver.findElement(By.xpath("//*[@class=\"time current\"]")).findElements(By.tagName("span"));
-                    for(WebElement element3 : elements3){
+                    for (WebElement element3 : elements3) {
                         System.out.println(element3.getText());
                         Thread.sleep(3000);
                     }
-
                 }
 
 //                System.out.println("오전진료");
