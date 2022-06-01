@@ -1,16 +1,13 @@
 package jiwjus.AllHospitalSchedules.entity;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id", "name"})
 public class Department {
@@ -19,10 +16,12 @@ public class Department {
     @Column(name = "department_id")
     private Long id;
 
+    @Column(name = "department_name")
     private String name;
 
     @OneToMany(mappedBy = "department")
     private List<HospitalDepartment> hospitalDepartments = new ArrayList<>();
+
 
     public Department(String name){
         this.name = name;

@@ -32,12 +32,12 @@ class HospitalDepartmentTest {
         em.persist(department1);
         em.persist(department2);
 
-        HospitalDepartment hospitalDepartment1 = new HospitalDepartment("서울대학교병원이비인후과", hospital1, department1);
-        HospitalDepartment hospitalDepartment2 = new HospitalDepartment("삼성서울병원이비인후과", hospital2, department1);
-        HospitalDepartment hospitalDepartment3 = new HospitalDepartment("서울성모병원이비인후과", hospital3, department1);
-        HospitalDepartment hospitalDepartment4 = new HospitalDepartment("서울대학교병원안과", hospital1, department2);
-        HospitalDepartment hospitalDepartment5 = new HospitalDepartment("삼성서울병원병원안과", hospital2, department2);
-        HospitalDepartment hospitalDepartment6 = new HospitalDepartment("서울성모병원안과", hospital3, department2);
+        HospitalDepartment hospitalDepartment1 = new HospitalDepartment(hospital1, department1, "서울대학교병원이비인후과");
+        HospitalDepartment hospitalDepartment2 = new HospitalDepartment(hospital2, department1, "삼성서울병원이비인후과");
+        HospitalDepartment hospitalDepartment3 = new HospitalDepartment(hospital3, department1, "서울성모병원이비인후과");
+        HospitalDepartment hospitalDepartment4 = new HospitalDepartment(hospital1, department2, "서울대학교병원안과");
+        HospitalDepartment hospitalDepartment5 = new HospitalDepartment(hospital2, department2, "삼성서울병원병원안과");
+        HospitalDepartment hospitalDepartment6 = new HospitalDepartment(hospital3, department2, "서울성모병원안과");
         em.persist(hospitalDepartment1);
         em.persist(hospitalDepartment2);
         em.persist(hospitalDepartment3);

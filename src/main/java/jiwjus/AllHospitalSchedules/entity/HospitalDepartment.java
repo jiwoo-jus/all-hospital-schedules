@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -17,8 +19,6 @@ public class HospitalDepartment {
     @Column(name = "hospital_department_id")
     private Long id;
 
-    private String name;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
@@ -26,6 +26,13 @@ public class HospitalDepartment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
+
+    @Column(name = "hospital_department_name")
+    private String name;
+
+    @OneToMany(mappedBy = "hospitalDepartment")
+    private List<Doctor> doctors = new ArrayList<>();
+
 
     public void changeHospital(Hospital hospital){
         this.hospital = hospital;
@@ -37,17 +44,13 @@ public class HospitalDepartment {
         department.getHospitalDepartments().add(this);
     }
 
-    public HospitalDepartment(String name, Hospital hospital, Department department){
+    public HospitalDepartment(Hospital hospital, Department department, String name){
         this.name = name;
-        this.hospital = hospital;
-
         if(hospital != null){
             changeHospital(hospital);
         }
-
         if(department != null){
             changeDepartment(department);
         }
     }
-
 }
