@@ -13,7 +13,7 @@ public class SchedulerApplication {
 
     @Scheduled(fixedRate = 1800000)     // 30분 간격으로 실행
     public void scheduleCrawling() throws InterruptedException{
-        scheduleCrawlingSNUH.main();    // 서울대학교병원 스케줄 크롤링
+        scheduleCrawlingSNUH.doit();    // 서울대학교병원 스케줄 크롤링
     }
 
 }
