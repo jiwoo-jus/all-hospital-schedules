@@ -36,22 +36,22 @@ class DoctorTest {
         em.persist(hospital6);
 
         Department department1 = new Department("이비인후과");
-        Department department2 = new Department("안과");
+        Department department2 = new Department("호흡기내과");
         em.persist(department1);
         em.persist(department2);
 
-        HospitalDepartment hospitalDepartment1 = new HospitalDepartment(hospital1, department1, "혜화서울대병원이비인후과");
-        HospitalDepartment hospitalDepartment2 = new HospitalDepartment(hospital2, department1, "삼성서울병원이비인후과");
-        HospitalDepartment hospitalDepartment3 = new HospitalDepartment(hospital3, department1, "서울성모병원이비인후과");
-        HospitalDepartment hospitalDepartment4 = new HospitalDepartment(hospital1, department2, "분당서울대병원이비인후과");
-        HospitalDepartment hospitalDepartment5 = new HospitalDepartment(hospital2, department2, "가천대길병원이비인후과");
-        HospitalDepartment hospitalDepartment6 = new HospitalDepartment(hospital3, department2, "인천성모병원이비인후과");
-        HospitalDepartment hospitalDepartment7 = new HospitalDepartment(hospital1, department1, "혜화서울대병원안과");
-        HospitalDepartment hospitalDepartment8 = new HospitalDepartment(hospital2, department1, "삼성서울병원안과");
-        HospitalDepartment hospitalDepartment9 = new HospitalDepartment(hospital3, department1, "서울성모병원안과");
-        HospitalDepartment hospitalDepartment10 = new HospitalDepartment(hospital1, department2, "분당서울대병원안과");
-        HospitalDepartment hospitalDepartment11 = new HospitalDepartment(hospital2, department2, "인천길병원안과");
-        HospitalDepartment hospitalDepartment12 = new HospitalDepartment(hospital3, department2, "인천성모병원안과");
+        HospitalDepartment hospitalDepartment1 = new HospitalDepartment(hospital1, department1, "이비인후과");
+        HospitalDepartment hospitalDepartment2 = new HospitalDepartment(hospital2, department1, "이비인후과");
+        HospitalDepartment hospitalDepartment3 = new HospitalDepartment(hospital3, department1, "이비인후과");
+        HospitalDepartment hospitalDepartment4 = new HospitalDepartment(hospital4, department1, "이비인후과");
+        HospitalDepartment hospitalDepartment5 = new HospitalDepartment(hospital5, department1, "이비인후과");
+        HospitalDepartment hospitalDepartment6 = new HospitalDepartment(hospital6, department1, "이비인후과");
+        HospitalDepartment hospitalDepartment7 = new HospitalDepartment(hospital1, department2, "호흡기내과");
+        HospitalDepartment hospitalDepartment8 = new HospitalDepartment(hospital2, department2, "호흡기내과");
+        HospitalDepartment hospitalDepartment9 = new HospitalDepartment(hospital3, department2, "호흡기내과");
+        HospitalDepartment hospitalDepartment10 = new HospitalDepartment(hospital4, department2, "호흡기내과");
+        HospitalDepartment hospitalDepartment11 = new HospitalDepartment(hospital5, department2, "호흡기내과");
+        HospitalDepartment hospitalDepartment12 = new HospitalDepartment(hospital6, department2, "호흡기내과");
 
         em.persist(hospitalDepartment1);
         em.persist(hospitalDepartment2);
@@ -72,6 +72,12 @@ class DoctorTest {
         Doctor doctor4 = new Doctor(hospitalDepartment1, "이준호");
         Doctor doctor5 = new Doctor(hospitalDepartment1, "김동영");
         Doctor doctor6 = new Doctor(hospitalDepartment1, "박무균");
+        Doctor doctor7 = new Doctor(hospitalDepartment7, "유철규");
+        Doctor doctor8 = new Doctor(hospitalDepartment7, "임재준");
+        Doctor doctor9 = new Doctor(hospitalDepartment7, "이창훈");
+        Doctor doctor10 = new Doctor(hospitalDepartment7, "최선미");
+        Doctor doctor11 = new Doctor(hospitalDepartment7, "조재영");
+        Doctor doctor12 = new Doctor(hospitalDepartment7, "곽낙원");
 
         em.persist(doctor1);
         em.persist(doctor2);
@@ -79,6 +85,12 @@ class DoctorTest {
         em.persist(doctor4);
         em.persist(doctor5);
         em.persist(doctor6);
+        em.persist(doctor7);
+        em.persist(doctor8);
+        em.persist(doctor9);
+        em.persist(doctor10);
+        em.persist(doctor11);
+        em.persist(doctor12);
 
 
         //초기화

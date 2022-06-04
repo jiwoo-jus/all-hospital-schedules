@@ -1,7 +1,13 @@
 package jiwjus.AllHospitalSchedules.crawler;
 
+import jiwjus.AllHospitalSchedules.entity.Doctor;
+import jiwjus.AllHospitalSchedules.entity.Hospital;
+import jiwjus.AllHospitalSchedules.entity.HospitalDepartment;
+import jiwjus.AllHospitalSchedules.entity.Schedule;
+import jiwjus.AllHospitalSchedules.repository.DoctorRepository;
 import jiwjus.AllHospitalSchedules.repository.HospitalDepartmentRepository;
 import jiwjus.AllHospitalSchedules.repository.HospitalRepository;
+import jiwjus.AllHospitalSchedules.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,13 +26,15 @@ public class ScheduleCrawlingSNUH {
 
     private final HospitalRepository hospitalRepository;
     private final HospitalDepartmentRepository hospitalDepartmentRepository;
+    private final DoctorRepository doctorRepository;
+    private final ScheduleRepository scheduleRepository;
 
     public void doit() {
 
         WebDriver driver = null;
         try {
             // drvier 설정
-            System.setProperty("webdriver.chrome.driver", "C:\\Users\\parkj\\Downloads\\chromedriver_win32\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\chromedriver.exe");
 
             // Chrome 드라이버 인스턴스 설정
             ChromeOptions options = new ChromeOptions();
@@ -50,8 +58,8 @@ public class ScheduleCrawlingSNUH {
             element.sendKeys(Keys.ENTER);
             Thread.sleep(1000);                                                // 대기 1초==1000
 
-            //Hospital hospital = hospitalRepository.findByName("혜화서울대병원");
-
+            Hospital hospital = hospitalRepository.findByName("혜화서울대병원");
+            System.out.println(hospital);
 
             WebElement btnNext = driver.findElement(By.className("btnNext"));
             List<WebElement> pubElements = driver.findElements(By.xpath("//div[contains(@class, \"feSlItem\")]"));
@@ -60,26 +68,33 @@ public class ScheduleCrawlingSNUH {
                 List<WebElement> departmentElements = pubElement.findElements(By.xpath(".//span"));
                 for (WebElement departmentElement : departmentElements) {                                                   // 과
                     System.out.println("-------------------------------------------------------------------------------");
-                    System.out.println(departmentElement);
-                    System.out.println(departmentElement.getText());
+
+                    String hospitalDepartmentName = departmentElement.getText();
+
+                    HospitalDepartment hospitalDepartment = hospitalDepartmentRepository.findByHospitalAndName(hospital, hospitalDepartmentName);
+                    if(hospitalDepartment == null)
+                        continue;
+                    System.out.println(hospitalDepartment);
+
                     js.executeScript("arguments[0].click();", departmentElement);
                     Thread.sleep(2000);
 
                     // 해당 진료과 의사 목록
-                    //List<WebElement> doctorElements = driver.findElements(By.xpath("//*[@id=\"doctorList\"]//li"));
                     List<WebElement> doctorElements = driver.findElements(By.xpath("//*[@id=\"doctorList\"]//li"));
-//                    rsvDoctorWrap current
 
                     System.out.println("의사수: " + doctorElements.size());
 
                     int i = 1;
                     // 의사별 진료일정
                     for(WebElement doctorElement : doctorElements){
-                        System.out.println("\n doctor "+ i++);
 
                         String doctorName = doctorElement.findElement(By.tagName("img")).getAttribute("alt"); //*[@id="doctorList"]/li[2]/div/div[2]/em[1]
-                        System.out.println("의사이름: " + doctorName);
                         Thread.sleep(1000);
+
+                        Doctor doctor = doctorRepository.findByHospitalDepartmentAndName(hospitalDepartment, doctorName);
+                        if(doctor == null)
+                            continue;
+                        System.out.println(doctor);
 
                         //해당 의사의 예약 가능한 진료날짜 조회
                         try{
@@ -90,11 +105,11 @@ public class ScheduleCrawlingSNUH {
                             continue;
                         }
 
+                        String yy = "";
+                        String mm = "";
                         try {
-                            System.out.println(
-                                    driver.findElement(By.className("ui-datepicker-year")).getText() + "년 " +
-                                            driver.findElement(By.className("ui-datepicker-month")).getText() + "월"
-                            );
+                            yy = driver.findElement(By.className("ui-datepicker-year")).getText();   //년
+                            mm = driver.findElement(By.className("ui-datepicker-month")).getText();  //월
                             Thread.sleep(1000);
                         } catch(Throwable e){       // "예약 가능한 일정이 조회되고 있지 않습니다." 얼럿 창 뜨는 경우
                             continue;
@@ -102,23 +117,23 @@ public class ScheduleCrawlingSNUH {
 
                         List<WebElement> scheduleElements = new ArrayList<WebElement>();
 
-                        scheduleElements.addAll(driver.findElements(By.xpath("//a[ contains(@class, \"scheduleAll\") ]")));
-                        //scheduleElements.addAll(driver.findElements(By.xpath("//a[ contains(@class, \"schedulAM\") or contains(@class, \"schedulPM\") or contains(@class, \"scheduleAll\") ]")));
+                        //scheduleElements.addAll(driver.findElements(By.xpath("//a[ contains(@class, \"scheduleAll\") ]")));
+                        scheduleElements.addAll(driver.findElements(By.xpath("//a[ contains(@class, \"schedulAM\") or contains(@class, \"schedulPM\") or contains(@class, \"scheduleAll\") ]")));
                         Thread.sleep(1000);
 
                         int scheduleElementsSize = scheduleElements.size();
-                        System.out.println("사이즈: " + scheduleElementsSize);
 
                         for(int j =0; j<scheduleElementsSize; j++){
-                            System.out.println(j);
 
                             List<WebElement> scheduleTempElements = new ArrayList<WebElement>();
-                            scheduleTempElements.addAll(driver.findElements(By.xpath("//a[ contains(@class, \"scheduleAll\") ]")));
-                            //scheduleTempElements.addAll(driver.findElements(By.xpath("//a[ contains(@class, \"schedulAM\") or contains(@class, \"schedulPM\") or contains(@class, \"scheduleAll\") ]")));
+                            //scheduleTempElements.addAll(driver.findElements(By.xpath("//a[ contains(@class, \"scheduleAll\") ]")));
+                            scheduleTempElements.addAll(driver.findElements(By.xpath("//a[ contains(@class, \"schedulAM\") or contains(@class, \"schedulPM\") or contains(@class, \"scheduleAll\") ]")));
 
                             WebElement element2 = scheduleTempElements.get(j);
 
-                            System.out.println(element2.getText() + "일");
+                            String dd = element2.getText();
+                            if(dd.length() == 1)
+                                dd = "0" + dd;
                             Thread.sleep(1000);
 
                             // 해당날짜의 예약 가능한 진료시간 조회
@@ -128,7 +143,13 @@ public class ScheduleCrawlingSNUH {
                             // 시간들
                             List<WebElement> elements3 = driver.findElement(By.xpath("//*[@class=\"time current\"]")).findElements(By.tagName("span"));
                             for (WebElement element3 : elements3) {
-                                System.out.println(element3.getText());
+                                String hhmm = element3.getText().substring(0, 2) + element3.getText().substring(3, 5);
+
+                                Schedule schedule = new Schedule(doctor, yy + mm + dd + hhmm);
+                                scheduleRepository.save(schedule);
+
+                                System.out.println(schedule);
+
                                 Thread.sleep(1000);
                             }
                         }
