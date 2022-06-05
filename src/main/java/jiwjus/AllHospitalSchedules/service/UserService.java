@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface UserService {
 
-    List<Region1Dto> findAllRegion1s();
-    List<Region2Dto> findRegion2sByRegion1(Long region1Id);
-    List<DepartmentDto> findAllDepartments();
+    List<Region1Dto> findRegion1s();
+    List<Region2Dto> findRegion2sByRegion1Id(Long region1Id);
+    List<DepartmentDto> findDepartments();
+    List<HospitalDepartmentDto> findHospitalDepartmentsByDepartmentIdAndRegion2Ids(HospitalDepartmentRequestDto hospitalDepartmentRequestDto);
 }

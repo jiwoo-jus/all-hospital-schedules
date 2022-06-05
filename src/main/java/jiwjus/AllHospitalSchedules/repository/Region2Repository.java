@@ -10,5 +10,5 @@ import java.util.List;
 public interface Region2Repository extends JpaRepository<Region2, Long> {
 
     @Query("select new jiwjus.AllHospitalSchedules.dto.Region2Dto(r2) from Region2 r2 join r2.region1 r1 where r1.id = :region1Id ")
-    List<Region2Dto> findRegion2DtosByRegion1(Long region1Id);
+    List<Region2Dto> findDtosByRegion1Id(Long region1Id);
 }
