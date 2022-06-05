@@ -1,4 +1,4 @@
-package jiwjus.AllHospitalSchedules.Scheduler;
+package jiwjus.AllHospitalSchedules.scheduler;
 
 import jiwjus.AllHospitalSchedules.crawler.ScheduleCrawlingSNUH;
 import lombok.RequiredArgsConstructor;

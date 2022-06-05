@@ -1,6 +1,8 @@
 package jiwjus.AllHospitalSchedules.entity;
 
 import jiwjus.AllHospitalSchedules.enumtype.DayOfWeek;
+import jiwjus.AllHospitalSchedules.enumtype.Region1Enum;
+import jiwjus.AllHospitalSchedules.enumtype.Region2Enum;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -22,12 +24,30 @@ class DoctorTest {
 
     @Test
     public void testEntity(){
-        Hospital hospital1 = new Hospital("혜화서울대병원", DayOfWeek.SAT, DayOfWeek.SUN);
-        Hospital hospital2 = new Hospital("삼성서울병원", DayOfWeek.SAT, DayOfWeek.SUN);
-        Hospital hospital3 = new Hospital("서울성모병원", DayOfWeek.SAT, DayOfWeek.SUN);
-        Hospital hospital4 = new Hospital("분당서울대병원", DayOfWeek.SAT, DayOfWeek.SUN);
-        Hospital hospital5 = new Hospital("인천길병원", DayOfWeek.SAT, DayOfWeek.SUN);
-        Hospital hospital6 = new Hospital("인천성모병원", DayOfWeek.SAT, DayOfWeek.SUN);
+        Region1 region1_1 = new Region1(Region1Enum.서울);
+        Region1 region1_2 = new Region1(Region1Enum.경기);
+        Region1 region1_3 = new Region1(Region1Enum.인천);
+        em.persist(region1_1);
+        em.persist(region1_2);
+        em.persist(region1_3);
+        Region2 region2_1 = new Region2(region1_1, Region2Enum.강북구);
+        Region2 region2_2 = new Region2(region1_1, Region2Enum.강남구);
+        Region2 region2_3 = new Region2(region1_1, Region2Enum.서초구);
+        Region2 region2_4 = new Region2(region1_2, Region2Enum.성남시);
+        Region2 region2_5 = new Region2(region1_3, Region2Enum.남동구);
+        Region2 region2_6 = new Region2(region1_3, Region2Enum.부평구);
+        em.persist(region2_1);
+        em.persist(region2_2);
+        em.persist(region2_3);
+        em.persist(region2_4);
+        em.persist(region2_5);
+        em.persist(region2_6);
+        Hospital hospital1 = new Hospital("혜화서울대병원", region2_1, DayOfWeek.SAT, DayOfWeek.SUN);
+        Hospital hospital2 = new Hospital("삼성서울병원", region2_2, DayOfWeek.SAT, DayOfWeek.SUN);
+        Hospital hospital3 = new Hospital("서울성모병원", region2_2, DayOfWeek.SAT, DayOfWeek.SUN);
+        Hospital hospital4 = new Hospital("분당서울대병원", region2_4, DayOfWeek.SAT, DayOfWeek.SUN);
+        Hospital hospital5 = new Hospital("인천길병원", region2_5, DayOfWeek.SAT, DayOfWeek.SUN);
+        Hospital hospital6 = new Hospital("인천성모병원", region2_6, DayOfWeek.SAT, DayOfWeek.SUN);
         em.persist(hospital1);
         em.persist(hospital2);
         em.persist(hospital3);
