@@ -5,6 +5,7 @@ import jiwjus.AllHospitalSchedules.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -15,6 +16,13 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+
+    @GetMapping("")
+    public ModelAndView userHome(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("property-list");
+        return modelAndView;
+    }
 
     @GetMapping("/region1")
     public ResponseEntity<List<Region1Dto>> findRegion1s(){
