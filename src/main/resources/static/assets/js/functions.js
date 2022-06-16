@@ -23,7 +23,6 @@ Table Of Content
 12 NOUISLIDER
 13 SPLIDE SLIDER
 14 CHART
-
 ====================== */
 
 "use strict";
@@ -65,8 +64,110 @@ Table Of Content
 }();
 
 
+var jw = {
+
+    init: async function () {
+        console.log('jw.init start');
+        await jw.getRegion1List();
+        await jw.getRegion2List("0");
+        await jw.getDepartmentList();
+        await e.init();
+    },
+
+    // START: region1List
+    getRegion1List: async function () {
+        console.log("getRegion1List start");
+
+        let region1Select = document.querySelector('.region1-select');
+
+        console.log("테스트 getRegion1List 1");
+        let response = await fetch("http://localhost:8090/user/region1");
+        let data = await response.json();
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            console.log("i: " + i);
+            console.log(data[i]);
+            var region1Option = document.createElement("option");
+            region1Option.value = data[i].id;
+            region1Option.innerText = data[i].name;
+            region1Select.append(region1Option);
+            console.log(region1Option);
+        }
+    },
+    // END: region1List
+
+    // START: region2List
+    getRegion2List: function (el) {
+        console.log("getRegion2List start");
+
+        let region2Area = document.querySelector('.region2-area');
+        let region2Divs = document.querySelectorAll('.region2-div');
+        let region2Inputs = document.querySelectorAll('.region2-input');
+        let region2Labels = document.querySelectorAll('.region2-label');
+
+        console.log("테스트 getRegion2List 1");
+        console.log("region1Id: " + el);
+        if (e.isVariableDefined(el)) {
+            if (el == "0")
+                region2Area.style.visibility = 'hidden';
+            else {
+                fetch("http://localhost:8090/user/region2/" + el)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        region2Area.style.visibility = 'visible';
+                        for (var i = 0; i < region2Divs.length; i++) {
+                            console.log(i);
+                            console.log(data[i]);
+                            if (e.isVariableDefined(data[i])) {
+                                console.log("visible");
+                                region2Divs[i].style.visibility = 'visible';
+                                region2Inputs[i].value = data[i].id;
+                                region2Labels[i].innerText = data[i].name;
+                            } else {
+                                console.log("hidden");
+                                region2Divs[i].style.visibility = 'hidden';
+                                region2Inputs[i].value = null;
+                                region2Labels[i].innerText = null;
+                            }
+                        }
+                    })
+            }
+        }
+    },
+    // END: region2List
+
+    // START: departmentList
+    getDepartmentList: async function () {
+        console.log("getDepartmentList start");
+
+        let departmentSelect = document.querySelector('.department-select');
+        let response = await fetch("http://localhost:8090/user/department");
+        let data = await response.json();
+        console.log(data);
+        departmentSelect.options.length = 1;
+        for (var i = 0; i < data.length; i++) {
+            console.log("i: " + i);
+            console.log(data[i]);
+            var departmentOption = document.createElement("option");
+            departmentOption.value = data[i].id;
+            departmentOption.innerText = data[i].name;
+            departmentSelect.append(departmentOption);
+            console.log(departmentOption);
+        }
+    },
+    // END: departmentList
+
+    // START: search
+    search: function(){
+        console.log("search start");
+
+
+    }
+}
+
 var e = {
     init: function () {
+        console.log('e.init start');
         e.preLoader(),
         e.megaMenu(),
         e.stickyHeader(),
@@ -211,6 +312,7 @@ var e = {
 
     // START: 01 Preloader
     preLoader: function () {
+        console.log("preLoader start")
         window.onload = function () {
             var preloader = e.select('.preloader');
             if (e.isVariableDefined(preloader)) {
@@ -225,6 +327,7 @@ var e = {
 
     // START: 02 Mega Menu
     megaMenu: function () {
+        console.log("megaMenu start")
         e.onAll('.dropdown-menu a.dropdown-item.dropdown-toggle', 'click', function (event) {
             var element = this;
             event.preventDefault();
@@ -252,6 +355,7 @@ var e = {
 
     // START: 03 Sticky Header
     stickyHeader: function () {
+        console.log("stickyHeader start")
         var stickyNav = e.select('.navbar-sticky');
         if (e.isVariableDefined(stickyNav)) {
             var stickyHeight = stickyNav.offsetHeight;
@@ -277,6 +381,7 @@ var e = {
 
      // START: 04 AOS Animation
     aosFunc: function () {
+        console.log("aosFunc start")
         var aos = e.select('.aos');
         if (e.isVariableDefined(aos)) {
             AOS.init({
@@ -290,6 +395,7 @@ var e = {
 
     // START: 05 Tiny Slider
     tinySlider: function () {
+        console.log("tinySlider start")
         var $carousel = e.select('.tiny-slider-inner');
         if (e.isVariableDefined($carousel)) {
           var tnsCarousel = e.selectAll('.tiny-slider-inner');
@@ -317,7 +423,7 @@ var e = {
               var sliderHoverPause = slider1.getAttribute('data-hoverpause') === 'true'; //option: true or false
               if (e.isVariableDefined(e.select('.custom-thumb'))) {
                 var sliderNavContainer = e.select('.custom-thumb');
-              } 
+              }
               var sliderLoop = slider1.getAttribute('data-loop') !== 'false'; //option: true or false
               var sliderRewind = slider1.getAttribute('data-rewind') === 'true'; //option: true or false
               var sliderAutoHeight = slider1.getAttribute('data-autoheight') === 'true'; //option: true or false
@@ -381,7 +487,7 @@ var e = {
                       }
                   }
               });
-          }); 
+          });
         }
     },
     // END: Tiny Slider
@@ -389,6 +495,7 @@ var e = {
 
     // START: 06 Sticky Bar
     stickyBar: function () {
+        console.log("stickyBar start")
         var sb = e.select('[data-sticky]');
         if (e.isVariableDefined(sb)) {
             var sticky = new Sticky('[data-sticky]');
@@ -399,6 +506,7 @@ var e = {
     // START: 07 Tooltip
     // Enable tooltips everywhere via data-toggle attribute
     toolTipFunc: function () {
+        console.log("toolTipFunc start")
         var tooltipTriggerList = [].slice.call(e.selectAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
           return new bootstrap.Tooltip(tooltipTriggerEl)
@@ -409,6 +517,7 @@ var e = {
     // START: 08 Popover
     // Enable popover everywhere via data-toggle attribute
     popOverFunc: function () {
+        console.log("popOverFunc start")
         var popoverTriggerList = [].slice.call(e.selectAll('[data-bs-toggle="popover"]'))
         var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
           return new bootstrap.Popover(popoverTriggerEl)
@@ -418,6 +527,7 @@ var e = {
 
     // START: 09 Back to Top
     backTotop: function () {
+        console.log("backTotop start")
         var scrollpos = window.scrollY;
         var backBtn = e.select('.back-top');
         if (e.isVariableDefined(backBtn)) {
@@ -443,6 +553,7 @@ var e = {
 
     // START: 10 GLightbox
     lightBox: function () {
+        console.log("lightBox start")
         var light = e.select('[data-glightbox]');
         if (e.isVariableDefined(light)) {
             var lb = GLightbox({
@@ -457,6 +568,7 @@ var e = {
 
     // START: 11 Choices
     choicesSelect: function () {
+        console.log("choicesSelect start")
         var choice = e.select('.js-choice');
         if (e.isVariableDefined(choice)) {
           var element = document.querySelectorAll('.js-choice');
@@ -473,6 +585,7 @@ var e = {
 
     // START: 12 noUislider
     rangeSlider: function () {
+        console.log("rangeSlider start")
         var rangeSlider = e.select('.noui-slider-range');
         if (e.isVariableDefined(rangeSlider)) {
           var rangeSliders = e.selectAll('.noui-slider-range');
@@ -481,12 +594,12 @@ var e = {
             var nouiMax = parseInt(slider.getAttribute('data-range-max'));
             var nouiSelectedMin = parseInt(slider.getAttribute('data-range-selected-min'));
             var nouiSelectedMax = parseInt(slider.getAttribute('data-range-selected-max'));
-            
+
             var rangeText = slider.previousElementSibling;
             var imin = rangeText.firstElementChild;
             var imax = rangeText.lastElementChild;
             var inputs = [imin, imax];
-            
+
             noUiSlider.create(slider, {
                 start: [nouiSelectedMin, nouiSelectedMax],
                 connect: true,
@@ -496,11 +609,11 @@ var e = {
                     max: [nouiMax]
                 }
             });
-            
+
             slider.noUiSlider.on("update", function(values, handle) {
                 inputs[handle].value = values[handle];
             });
-  
+
           });
         }
     },
@@ -508,6 +621,7 @@ var e = {
 
     // START: 13 Splide slider
     splideSlider: function () {
+        console.log("splideSlider start")
       var splide1 = e.select('.splide-main');
         if (e.isVariableDefined(splide1)) {
           var secondarySlider = new Splide( '.splide-thumb', {
@@ -535,7 +649,7 @@ var e = {
             arrows     : false,
             cover      : true,
         } );
-        
+
         // Set the thumbnails slider as a sync target and then call mount.
         primarySlider.sync( secondarySlider ).mount();
 
@@ -545,13 +659,14 @@ var e = {
 
     // START: 14 Chart
     chartFunc: function () {
-      var chartContainer = e.select('#chartJSContainer');
-      if (e.isVariableDefined(chartContainer)) {
-        var options = {
-            type: 'line',
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
+        console.log("chartFunc start")
+        var chartContainer = e.select('#chartJSContainer');
+        if (e.isVariableDefined(chartContainer)) {
+            var options = {
+                type: 'line',
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    datasets: [{
                         label: '# of Groth',
                         data: [12, 19, 15, 17, 12, 10, 14, 16, 5, 7, 12, 15],
                         borderColor: [
@@ -563,40 +678,42 @@ var e = {
                             'rgba(255, 159, 64, 1)'
                         ],
                         borderWidth: 5
-                    },	
-                    {
-                        label: '# of Points',
-                        data: [7, 11, 5, 8, 3, 7, 9, 3, 15, 6, 8, 18],
-                        borderColor: [
-                                            'rgba(255, 99, 132, 1)',
-                                            'rgba(54, 162, 235, 1)',
-                                            'rgba(255, 206, 86, 1)',
-                                            'rgba(75, 192, 192, 1)',
-                                            'rgba(153, 102, 255, 1)',
-                                            'rgba(255, 159, 64, 1)'
-                                    ],
-                        borderWidth: 5
                     },
-    
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            reverse: false
-                        }
-                    }]
+                        {
+                            label: '# of Points',
+                            data: [7, 11, 5, 8, 3, 7, 9, 3, 15, 6, 8, 18],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 5
+                        },
+
+                    ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                reverse: false
+                            }
+                        }]
+                    }
                 }
             }
-        }
-    
 
-        var ctx = document.getElementById('chartJSContainer').getContext('2d');
-        new Chart(ctx, options);
-      }
-    }
+
+            var ctx = document.getElementById('chartJSContainer').getContext('2d');
+            new Chart(ctx, options);
+        }
+    },
     // END: Chart
 
 };
-e.init();
+
+jw.init();
+// e.init();

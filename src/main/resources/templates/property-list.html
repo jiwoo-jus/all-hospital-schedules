@@ -100,23 +100,14 @@ Header END -->
 								<div class="row g-3 align-items-center">
 									<!-- Search item -->
 									<div class="col-sm-6 col-md-3 pb-2 pb-md-0">
-										<select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">
+										<select class="form-select form-select-sm js-choice region1-select" aria-label=".form-select-sm example" onchange="return jw.getRegion2List(this.value)">
 											<option value="">지역</option>
-											<option>Rent</option>
-											<option>Sale</option>
 										</select>
 									</div>
 									<!-- Search item -->
 									<div class="col-sm-6 col-md-3 pb-2 pb-md-0">
-										<select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">
+										<select class="form-select form-select-sm js-choice department-select" aria-label=".form-select-sm example">
 											<option value="">진료과</option>
-											<option>Aparement</option>
-											<option>Land</option>
-											<option>Houses</option>
-											<option>Villas</option>
-											<option>Retails</option>
-											<option>Shop</option>
-											<option>Office</option>
 										</select>
 									</div>
 									<!-- Search item -->
@@ -130,7 +121,7 @@ Header END -->
 									</div>
 									<!-- Button -->
 									<div class="col-sm-6 col-md-3 pb-2 pb-md-0">
-										<button type="button" class="btn btn-primary w-100">검색</button>
+										<button type="button" class="btn btn-primary w-100" onclick="return jw.search()">검색</button>
 									</div>
 								</div>
 							</div>
@@ -183,21 +174,21 @@ Header END -->
 									<div class = "row">
 										<h6 class="font-base text-primary mt-4"><i class="fas fa-fw fa-sliders-h me-2"></i>상세지역</h6>
 									</div>
-									<div class="row mt-2">
+									<div class="row mt-2 region2-area">
 										<!-- Item -->
 										<div class="col-sm-6 col-md-3">
 											<!-- checkbox -->
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-												<label class="form-check-label text-dark" for="flexCheckDefault">
-													Clinic
+											<div class="form-check region2-div">
+												<input class="form-check-input region2-input" type="checkbox" value="" id="flexCheckDefault">
+												<label class="form-check-label text-dark region2-label" for="flexCheckDefault">
+													강남구
 												</label>
 											</div>
 											<!-- checkbox -->
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
-												<label class="form-check-label text-dark" for="flexCheckDefault2">
-													Internet
+											<div class="form-check region2-div">
+												<input class="form-check-input region2-input" type="checkbox" value="" id="flexCheckDefault2">
+												<label class="form-check-label text-dark region2-label" for="flexCheckDefault2">
+													관악구
 												</label>
 											</div>
 										</div>
@@ -205,35 +196,17 @@ Header END -->
 										<!-- Item -->
 										<div class="col-sm-6 col-md-3">
 											<!-- checkbox -->
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
-												<label class="form-check-label text-dark" for="flexCheckDefault3">
-													Park
+											<div class="form-check region2-div">
+												<input class="form-check-input region2-input" type="checkbox" value="" id="flexCheckDefault3">
+												<label class="form-check-label text-dark region2-label" for="flexCheckDefault3">
+													강동구
 												</label>
 											</div>
 											<!-- checkbox -->
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
-												<label class="form-check-label text-dark" for="flexCheckDefault4">
-													School
-												</label>
-											</div>
-										</div>
-
-										<!-- Item -->
-										<div class="col-sm-6 col-md-3">
-											<!-- checkbox -->
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5">
-												<label class="form-check-label text-dark" for="flexCheckDefault5">
-													Supermarket
-												</label>
-											</div>
-											<!-- checkbox -->
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault6">
-												<label class="form-check-label text-dark" for="flexCheckDefault6">
-													Swiming pool
+											<div class="form-check region2-div">
+												<input class="form-check-input region2-input" type="checkbox" value="" id="flexCheckDefault4">
+												<label class="form-check-label text-dark region2-label" for="flexCheckDefault4">
+													광진구
 												</label>
 											</div>
 										</div>
@@ -241,17 +214,35 @@ Header END -->
 										<!-- Item -->
 										<div class="col-sm-6 col-md-3">
 											<!-- checkbox -->
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault7">
-												<label class="form-check-label text-dark" for="flexCheckDefault7">
-													Transportation hub
+											<div class="form-check region2-div">
+												<input class="form-check-input region2-input" type="checkbox" value="" id="flexCheckDefault5">
+												<label class="form-check-label text-dark region2-label" for="flexCheckDefault5">
+													강북구
 												</label>
 											</div>
 											<!-- checkbox -->
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault8">
-												<label class="form-check-label text-dark" for="flexCheckDefault8">
-													Air Conditioning
+											<div class="form-check region2-div">
+												<input class="form-check-input region2-input" type="checkbox" value="" id="flexCheckDefault6">
+												<label class="form-check-label text-dark region2-label" for="flexCheckDefault6">
+													구로구
+												</label>
+											</div>
+										</div>
+
+										<!-- Item -->
+										<div class="col-sm-6 col-md-3">
+											<!-- checkbox -->
+											<div class="form-check region2-div">
+												<input class="form-check-input region2-input" type="checkbox" value="" id="flexCheckDefault7">
+												<label class="form-check-label text-dark region2-label" for="flexCheckDefault7">
+													강서구
+												</label>
+											</div>
+											<!-- checkbox -->
+											<div class="form-check region2-div">
+												<input class="form-check-input region2-input" type="checkbox" value="" id="flexCheckDefault8">
+												<label class="form-check-label text-dark region2-label" for="flexCheckDefault8">
+													서초구
 												</label>
 											</div>
 										</div>
@@ -278,7 +269,7 @@ Header END -->
 					<!-- Title START -->
 					<div class="d-md-flex justify-content-md-between align-items-center">
 						<!-- Title -->
-						<h3 class="mb-0">30 Properties in California</h3>
+						<h3 class="mb-0">3 개의 결과</h3>
 						<!-- Button -->
 						<div class="text-primary-hover text-end d-none d-md-block">
 							<ul class="list-inline">
@@ -302,7 +293,7 @@ Header END -->
 							<!-- Advance search START -->
 							<div class="bg-white shadow-lg rounded-1 p-4 mb-4">
 								<!-- Title -->
-								<h4 class="mb-4">Advance Search</h4>
+								<h4 class="mb-4">조건 검색</h4>
 								<div class="row">
 									<div class="col-12">
 										<!-- Form START -->
@@ -313,17 +304,17 @@ Header END -->
 												<!-- Rent -->
 												<li class="list-inline-item">
 													<input type="radio" class="btn-check" name="options" id="option1">
-													<label class="btn btn-sm btn-light btn-primary-soft-check" for="option1">Rent</label>
+													<label class="btn btn-sm btn-light btn-primary-soft-check" for="option1">3차병원</label>
 												</li>
 												<!-- Sale -->
 												<li class="list-inline-item">
 													<input type="radio" class="btn-check" name="options" id="option2">
-													<label class="btn btn-sm btn-light btn-primary-soft-check" for="option2">Sale</label>
+													<label class="btn btn-sm btn-light btn-primary-soft-check" for="option2">2차병원</label>
 												</li>
 												<!-- Buy -->
 												<li class="list-inline-item">
 													<input type="radio" class="btn-check" name="options" id="option3">
-													<label class="btn btn-sm btn-light btn-primary-soft-check" for="option3">Buy</label>
+													<label class="btn btn-sm btn-light btn-primary-soft-check" for="option3">1차병원</label>
 												</li>
 											</ul>
 											<hr class="my-0">
@@ -334,37 +325,37 @@ Header END -->
 												<!-- Apartment -->
 												<li class="list-inline-item mb-2">
 													<input type="checkbox" class="btn-check" id="btn-check-2">
-													<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-2">Aparement</label>
+													<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-2">입원</label>
 												</li>
 												<!-- Land -->
 												<li class="list-inline-item mb-2">
 													<input type="checkbox" class="btn-check" id="btn-check-3">
-													<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-3">Land</label>
+													<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-3">즉시예약</label>
 												</li>
 												<!-- House -->
 												<li class="list-inline-item mb-2">
 													<input type="checkbox" class="btn-check" id="btn-check-4">
-													<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-4">Houses</label>
+													<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-4">재증명발급</label>
 												</li>
 												<!-- Villas -->
 												<li class="list-inline-item mb-2">
 													<input type="checkbox" class="btn-check" id="btn-check-5">
-													<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-5">Villas</label>
+													<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-5">당일검사</label>
 												</li>
 												<!-- Retails -->
 												<li class="list-inline-item mb-2">
 													<input type="checkbox" class="btn-check" id="btn-check-6">
-													<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-6">Retails</label>
+													<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-6">감염</label>
 												</li>
 												<!-- Shop -->
 												<li class="list-inline-item mb-2">
 													<input type="checkbox" class="btn-check" id="btn-check-7">
-													<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-7">Shop</label>
+													<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-7">CD복사</label>
 												</li>
 												<!-- Office -->
 												<li class="list-inline-item mb-2">
 													<input type="checkbox" class="btn-check" id="btn-check-8">
-													<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-8">Office</label>
+													<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-8">보호자동반</label>
 												</li>
 											</ul>
 											<hr class="my-0">
@@ -844,7 +835,7 @@ Header END -->
 									<div class="col-md-5 col-lg-12 col-xl-5">
 										<div class="card overflow-hidden">
 											<!-- Image -->
-											<img class="card-img rounded-1" src="assets/images/property/grid-list/02.jpg" alt="Card image">
+											<img class="card-img rounded-1" src="assets/images/property/grid-list/09.jpg" alt="Card image">
 											<!-- Image overlay -->
 											<div class="card-img-overlay">
 												<!-- Meta -->
@@ -864,8 +855,8 @@ Header END -->
 											<!-- Detail -->
 											<div class="col-md-7">
 												<!-- Title -->
-												<h4 class="card-title"><a href="#">5620 morningstar Avenue</a></h4>
-												<p class="small mb-3 mb-md-2 text-primary-hover"><a href="#"><i class="fas fa-map-marker-alt me-1"></i>Chicago HQ Estica Cop. 8573 Livingston</a></p>
+												<h4 class="card-title"><a href="#">서울성모병원 이비인후과</a></h4>
+												<p class="small mb-3 mb-md-2 text-primary-hover"><a href="#"><i class="fas fa-map-marker-alt me-1"></i>서울시 서초구 반포대로 222 (06591)</a></p>
 												<!-- Meta -->
 												<ul class="nav nav-divider align-items-center text-uppercase small mb-2 mb-lg-3">
 													<li class="nav-item me-4 mb-1">
@@ -886,16 +877,18 @@ Header END -->
 												<div class="d-sm-flex justify-content-sm-between">
 													<!-- Badge -->
 													<div class="mb-2 mb-sm-0">
-														<span class="badge bg-primary-soft text-primary"><i class="fas fa-user-friends pe-1"></i>Family</span>
-														<span class="badge bg-warning-soft text-warning"><i class="fas fa-rupee-sign pe-1"></i>For rent</span>
-														<span class="badge bg-success-soft text-success"><i class="fas fa-home pe-1"></i>Apartment</span>
+														<span class="badge bg-primary-soft text-primary"><i class="fas fa-user-friends pe-1"></i>진료시간</span>
+														<span class="badge bg-warning-soft text-warning"><i class="fas fa-rupee-sign pe-1"></i>대표번호</span>
+														<span class="badge bg-success-soft text-success"><i class="fas fa-home pe-1"></i>휴무일</span>
 													</div>
 													<!-- Price -->
 													<div>
 														<div class="d-flex d-md-block align-items-center mb-2 mb-lg-0">
-															<h5 class="text-success mb-0 me-3 me-md-0">$20,000</h5>
-															<h6 class="text-decoration-line-through mb-0 me-3 me-md-0 text-muted">$24,000</h6>
-															<p class="badge bg-orange text-white mb-0">15% off</p>
+<!--															<h5 class="text-success mb-0 me-3 me-md-0">09~17</h5>-->
+<!--															<h6 class="mb-0 me-3 me-md-0 text-muted">1588-1511</h6>-->
+															<h5 class="text-success mb-0 me-md-0">09~17</h5>
+															<h6 class="mb-0 me-md-0 text-muted">1588-1511</h6>
+															<p class="badge bg-orange text-white mb-0">토 일</p>
 														</div>
 													</div>
 												</div>
@@ -904,10 +897,10 @@ Header END -->
 											<div class="d-flex justify-content-between align-items-center">
 												<!-- Avatar -->
 												<div class="d-flex align-items-center">
-													<div class="avatar avatar-sm me-2">
-														<img class="avatar-img rounded-circle" src="assets/images/avatar/06.jpg" alt="avatar">
-													</div>
-													<p class="mb-1"><a href="#" class=" text-reset btn-link">Jerry Reid</a></p>
+<!--													<div class="avatar avatar-sm me-2">-->
+<!--														<img class="avatar-img rounded-circle" src="assets/images/avatar/06.jpg" alt="avatar">-->
+<!--													</div>-->
+													<p class="mb-1"><a href="#" class=" text-reset btn-link">상급종합병원</a></p>
 												</div>
 												<!-- Button -->
 												<div class="d-flex align-items-center">
@@ -930,7 +923,7 @@ Header END -->
 									<div class="col-md-5 col-lg-12 col-xl-5">
 										<div class="card overflow-hidden">
 											<!-- Image -->
-											<img class="card-img rounded-1" src="assets/images/property/grid-list/09.jpg" alt="Card image">
+											<img class="card-img rounded-1" src="assets/images/property/grid-list/02.jpg" alt="Card image">
 											<!-- Image overlay -->
 											<div class="card-img-overlay">
 												<div class="text-end">

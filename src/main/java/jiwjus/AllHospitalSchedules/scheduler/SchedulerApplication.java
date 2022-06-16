@@ -11,7 +11,7 @@ public class SchedulerApplication {
 
     private final ScheduleCrawlingSNUH scheduleCrawlingSNUH;
 
-//    @Scheduled(fixedRate = 1800000)     // 30분 간격으로 실행
+    @Scheduled(fixedRate = 1800000)     // 30분 간격으로 실행
     public void scheduleCrawling() throws InterruptedException{
         scheduleCrawlingSNUH.doit();    // 서울대학교병원 스케줄 크롤링
     }
