@@ -3,11 +3,16 @@ server:
   port: 8090
 
 spring:
+#  datasource:
+#    url: jdbc:h2:tcp://localhost/~/all-hospital-schedules
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
   datasource:
-    url: jdbc:h2:tcp://localhost/~/all-hospital-schedules
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql://localhost:3306/all_hospital_schedules?serverTimezone=UTC&characterEncoding=UTF-8
+    username: id
+    password: pwd
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
