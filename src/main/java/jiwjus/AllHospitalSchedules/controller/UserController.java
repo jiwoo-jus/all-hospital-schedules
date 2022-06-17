@@ -43,4 +43,9 @@ public class UserController {
     public ResponseEntity<List<HospitalDepartmentDto>> findHospitalDepartmentsByRegion2sAndDepartment(@RequestBody HospitalDepartmentRequestDto hospitalDepartmentRequestDto){
         return ResponseEntity.ok(userService.findHospitalDepartmentsByDepartmentIdAndRegion2Ids(hospitalDepartmentRequestDto));
     }
+
+    @GetMapping("/schedule/{hospitalDepartmentId}")
+    public ResponseEntity<List<DoctorScheduleDto>> findSchedulesByHospitalDepartmentId(@PathVariable Long hospitalDepartmentId){
+        return ResponseEntity.ok(userService.findSchedulesByHospitalDepartmentId(hospitalDepartmentId));
+    }
 }

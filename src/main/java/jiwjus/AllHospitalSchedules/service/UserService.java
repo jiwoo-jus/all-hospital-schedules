@@ -10,4 +10,5 @@ public interface UserService {
     List<Region2Dto> findRegion2sByRegion1Id(Long region1Id);
     List<DepartmentDto> findDepartments();
     List<HospitalDepartmentDto> findHospitalDepartmentsByDepartmentIdAndRegion2Ids(HospitalDepartmentRequestDto hospitalDepartmentRequestDto);
+    List<DoctorScheduleDto> findSchedulesByHospitalDepartmentId(Long hospitalDepartmentId);
 }
